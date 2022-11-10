@@ -1,6 +1,7 @@
 """
 Target game
 """
+import copy
 import random
 import string
 from typing import List
@@ -26,6 +27,22 @@ def get_words(file: str, letters: List[str]) -> List[str]:
     """
     Reads the file file. Checks the words with rules and returns a list of words.
     """
+    with open(file, 'r') as dict_of_words:
+        possible_words = []
+        for word in dict_of_words:
+            word = word[:-1].lower()
+            if len(word) >= 4:
+                if letters[4] in [ltr for ltr in word]:
+                    if all(item in letters for item in [ltr for ltr in word]):
+                        copylett = copy.copy(letters)
+                        try:
+                            for ltr in word:
+                                copylett.remove(ltr)
+                            possible_words.append(word)
+                        except  ValueError:
+                            continue
+    possible_words = list(set(possible_words))
+    return possible_words    
 
 
 def get_user_words() -> List[str]:
