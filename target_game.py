@@ -1,9 +1,7 @@
 """
 Target game
 """
-import copy
-import random
-import string
+import copy, string, random, venv
 from typing import List
 
 def generate_grid() -> List[List[str]]:
@@ -74,6 +72,22 @@ def get_pure_user_words(user_words: List[str], letters: List[str], words_from_di
     ['apple', 'pepe', 'loop', 'ham', 'orange'])
     ['lopj', 'lope']
     """
+    undicted_words = []
+    for word in user_words:
+        if word not in words_from_dict:
+            if len(word) >= 4:
+                if letters[4] in word:
+                    if all(item in letters for item in [ltr for ltr in word]):
+                        tword = copy.copy(word)
+                        copylett = copy.copy(letters)
+                        try:
+                            for ltr in word:
+                                copylett.remove(ltr)
+                                undicted_words.append(word)
+                        except  ValueError:
+                            continue
+    undicted_words = list(set(undicted_words))
+    return undicted_words
 
 def results():
     """
