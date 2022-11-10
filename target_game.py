@@ -42,7 +42,7 @@ def get_words(file: str, letters: List[str]) -> List[str]:
                         except  ValueError:
                             continue
     possible_words = list(set(possible_words))
-    return possible_words    
+    return possible_words
 
 
 def get_user_words() -> List[str]:
@@ -52,6 +52,15 @@ def get_user_words() -> List[str]:
     for Windows.
     Note: the user presses the enter key after entering each word.
     """
+    words_list = []
+    while True:
+        words = input()
+        if words == "":
+            break
+        else:
+            words_list.append(words)
+    return words_list 
+
 
 
 def get_pure_user_words(user_words: List[str], letters: List[str], words_from_dict: List[str]) -> List[str]:
