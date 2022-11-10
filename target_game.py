@@ -93,5 +93,19 @@ def results():
     """
     Writting result in file
     """
+    grid = []
+    counter = 0
+    while counter != 9:
+        grid.append(random.choice(string.ascii_letters).upper())
+        counter += 1
+    user_words = get_user_words()
+    all_words = get_words('en.txt', grid)
+    skip_w = set(all_words) - set(user_words)
+    new_words = get_pure_user_words(user_words, grid, all_words)
+    with open('result.txt', 'w') as file:
+        file.write(user_words)
+        file.write(all_words)
+        file.write(skip_w)
+        file.write(new_words)
 
 
